@@ -1,5 +1,4 @@
-
-#Code of SQL File of my Project
+#Code of Project in SQL 
 
 create database Restaurant_Management_System;
 
@@ -240,79 +239,91 @@ insert into Delivery values
  begin 
  select * from Employees;
  end;
+ exec showEmployeeData;
  
   create procedure showCustomerData
   as
  begin 
  select * from Customer
  end;
+ exec showCustomerData;
  
 create procedure showTableData
 as
  begin 
  select * from Tables
  end;
- 
+ exec showTableData;
  
   create procedure showReservationDetails
   as
  begin 
  select * from Reservation
  end;
+ exec showReservationDetails;
  
   create procedure showkarahiData
   as
  begin 
  select * from Karahi
  end;
+ exec showkarahiData;
  
   create procedure showPizzaData
   as
  begin 
  select * from Pizza
  end;
+ exec showPizzaData;
  
-  create procedure showBurgersData()
+  create procedure showBurgersData
+  as
  begin 
  select * from Burger
  end;
+ exec showBurgersData;
  
  create procedure showIceCreamData
  as
  begin 
  select * from IceCream
  end;
+ exec showIceCreamData;
  
  create procedure showDeliveryData
  as
  begin 
  select * from Delivery 
  end;
+ exec showDeliveryData;
  
- 
-   create procedure showKarahiOrderData
-   as
+create procedure showKarahiOrderData
+as
  begin 
  select * from Karahi_Order
  end;
+ exec showKarahiOrderData;
  
-   create procedure showIceCreamOrderData
-   as
+create procedure showIceCreamOrderData
+as
  begin 
  select * from IceCream_Order
  end;
+ exec showIceCreamOrderData;
  
-   create procedure showBurgerOrderData
+create procedure showBurgerOrderData
    as
  begin 
  select * from Burger_order
  end;
+ exec showBurgerOrderData;
  
  create procedure showPizzaOrderData
  as
  begin 
  select * from Pizza_Order
  end;
+ exec showPizzaOrderData;
  
  Create procedure countt
  as
@@ -320,11 +331,12 @@ begin
 SELECT Status, COUNT(*) AS count_of_tables
 FROM Tables
 GROUP BY Status; 
-end 
+end ;
 
-call countt;
+exec countt;
  
- create procedure Grand_total()
+ create procedure Grand_total
+ as
 Begin
 Select
     (SELECT SUM(pizza_price) FROM Pizza )AS pizza_sales ,
@@ -332,9 +344,9 @@ Select
      (SELECT SUM(iceCream_price)   FROM IceCream )AS iceCream_sales,
      (SELECT SUM(karahi_price)   FROM Karahi )AS karahi_sales,
     (SELECT SUM(pizza_price) FROM Pizza ) + (SELECT SUM(burger_price) FROM Burger ) + (SELECT SUM(iceCream_price) FROM IceCream ) + (SELECT SUM(karahi_price) FROM Karahi )  AS grand_sales;
-END 
+END ;
 
-call Grand_total();
+exec Grand_total;
  
  
 -- QUERIEESS
@@ -406,6 +418,7 @@ LEFT JOIN
 GROUP BY
     pi.pizza_name,
     bi.burger_name;
+
 
 
 -- drop
