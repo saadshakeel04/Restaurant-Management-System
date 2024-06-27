@@ -1,0 +1,419 @@
+
+#Code of SQL File of my Project
+
+create database Restaurant_Management_System;
+
+use Restaurant_Management_System;
+
+-- EmployeesTable
+
+create TABLE Employees (
+ employe_id INT PRIMARY KEY,
+ employe_name VARCHAR(50),
+ designation VARCHAR(50) ,
+ salary DECIMAL(8, 2) 
+);
+
+-- employee table data 
+insert into Employees 
+values
+(1,'Mushtaq','Cashier',5000.00),
+(2,'Emma','Cook',20000.00),
+(3,'Nasir Jutt','Cook',50000.00), 
+(4,'Saad','Manager',45500.00), 
+(5,'Nasir Jutt','Waiter',500.00) ;
+
+-- customer table  
+
+create table Customer( 
+customer_id int primary key, 
+customer_name varchar (30), 
+email varchar (50), 
+phone_no varchar (15) 
+);
+
+insert into Customer
+values
+(1,'Fakhar','saad04@gmail.com','0320-4573113'), 
+(2,'Anas','Anas14@gmail.com','0306-453243'), 
+(3,'Abdullah','AbdCH@gmail.com','0312-4573113'), 
+(4,'Aini','Aini06@gmail.com','0314-44673113'), 
+(5,'Ahsan','Sonu27@gmail.com','0300-4573113');
+
+create table Karahi(
+karahi_id int primary key, 
+karahi_name varchar (30), 
+karahi_size varchar (10), 
+karahi_price decimal (6,2)
+);
+
+insert into Karahi
+values 
+(1,'Makhni Karahi','F', 2000.00),
+(2,'Bonfire Karahi','F', 2200.00),
+(3,'Mutton Karahi','H', 2000.00),
+(4,'Kabab Karahi','H', 1800.00),
+(5,'White Karahi','F', 1900.00);
+
+
+create table Pizza( 
+pizza_id int primary key, 
+pizza_name varchar (30),  
+pizza_size varchar (10), 
+pizza_price decimal (8,2)
+);  
+
+-- insert values 
+ 
+insert into Pizza
+values
+(1,'Royal Crust Pizza','L', 2400.00),
+(2,'Malai Boti Pizza','L', 2200.00),
+(3,'Crown Crust Pizza','M', 1800.00), 
+(4,'Tandoori Pizza','L', 2100.00), 
+(5,'Smoky Pizza','S', 1000.00);
+
+create table Burger( 
+burger_id int primary key, 
+burger_name varchar (30),  
+burger_price decimal (8,2) 
+); 
+
+-- insert burger data 
+
+insert into Burger
+ values
+(1,'Thunder Zinger Burger', 500.00),
+(2,'Beef Burger', 700.00),
+(3,'Grilled Chicken Burger', 400.00),
+ (4,'Fillet Burger', 600.00), 
+(5,'Crispy Chicken Burger', 300.00);
+
+
+create table IceCream( 
+iceCream_id int primary key, 
+iceCream_name varchar (30),  
+iceCream_price decimal (6,2) 
+); 
+
+insert into IceCream
+ values
+(1,'M&Ms', 500.00),
+(2,'Triple Choclate ', 400.00),
+(3,'Flurry', 450.00),
+ (4,'Special Cone', 300.00), 
+(5,'Sweet Stawberry', 350.00);
+
+
+create table Pizza_Orders( 
+order_id int primary key, 
+customer_id int, 
+pizza_id int, 
+order_date date, 
+quantity int, 
+total_amount decimal (8,3), 
+payment_method varchar(20), 
+foreign key (customer_id) references customer(customer_id), 
+foreign key (pizza_id) references pizza_item(pizza_id) 
+); 
+
+insert into Pizza_Orders values 
+(1,1,2,'2024-06-12',1,2200.00 , 'Cash'), 
+(2,2,3,'2024-06-14',2,3600.00 , 'Card'), 
+(3,3,2,'2024-06-13',2,4400.00 , 'Cash'), 
+(4,4,1,'2024-06-15',1,2400.00 , 'Cash'), 
+(5,5,5,'2024-06-12',1,1000.00 , 'Debit Card');
+
+
+create table Burger_Orders( 
+order_id int primary key, 
+customer_id int, 
+burger_id int, 
+order_date date, 
+quantity int, 
+total_amount decimal (8,2), 
+payment_method varchar(20),
+ 
+foreign key (customer_id) references customer(customer_id), 
+foreign key (burger_id) references burger_item (burger_id)
+
+); 
+
+insert into Burger_Orders values 
+(1,1,2,'2023-09-12',1,700.00 , 'Cash'), 
+(2,3,3,'2023-09-12',2,800.00 , 'Cash'), 
+(3,4,2,'2023-09-12',5,3500.00 , 'Card'), 
+(4,5,1,'2023-09-15',4,2000.00 , 'Card'), 
+(5,2,4,'2023-09-12',3,1800.00 , 'Cash'); 
+
+
+create table Karahi_Orders( 
+order_id int primary key, 
+customer_id int, 
+karahi_id int, 
+order_date date, 
+quantity int, 
+total_amount decimal (8,2), 
+payment_method varchar(20),
+ 
+foreign key (customer_id) references customer(customer_id), 
+foreign key (karahi_id) references Karahi (karahi_id)
+
+); 
+
+insert into Karahi_Orders values 
+(1,1,2,'2023-09-12',1,2200.00 , 'Cash'), 
+(2,3,3,'2023-09-12',2,4000.00 , 'Cash'), 
+(3,2,5,'2023-09-12',2,3800.00 , 'Card'), 
+(4,4,1,'2023-09-15',3,6000.00 , 'Card'), 
+(5,5,4,'2023-09-12',1,1800.00 , 'Cash');
+
+create table IceCream_orders( 
+order_id int primary key, 
+customer_id int, 
+iceCream_id int, 
+order_date date, 
+quantity int, 
+total_amount decimal (8,2), 
+payment_method varchar(20),
+ 
+foreign key (customer_id) references customer(customer_id), 
+foreign key (iceCream_id) references IceCream (iceCream_id)
+
+); 
+
+insert into IceCream_orders values 
+(1,1,2,'2023-09-12',1,400.00 , 'Cash'), 
+(2,5,3,'2023-09-12',2,900.00 , 'Cash'), 
+(3,3,5,'2023-09-12',3,1050.00 , 'Card'), 
+(4,2,1,'2023-09-15',4,2000.00 , 'Card'), 
+(5,4,4,'2023-09-12',1,300.00 , 'Cash');
+
+
+Create table Tables ( 
+table_id int primary key, 
+capacity int, 
+Status varchar(20)
+);  
+
+Insert into Tables
+ Values  
+(101,6,'Reserved'), 
+(102,4,'Available'), 
+(103,6,'Reserved'), 
+(104,4,'Available'), 
+(105,4,'Reserved'); 
+
+Create Table Reservation ( 
+Reservation_ID int primary key, 
+customer_id int, 
+table_id int, 
+Reservation_Date date, 
+Foreign key (Customer_ID) references customer(customer_id), 
+Foreign key (Table_ID) references Tables (table_id)
+);  
+
+Insert into Reservation Values 
+(1,5,101,'2023-07-09'), 
+(2,3,103,'2023-07-09'), 
+(3,2,105,'2023-07-10');
+
+Create Table Delivery ( 
+Delivery_id int primary key, 
+Delivery_man varchar (30), 
+Delivery_man_contact varchar(30), 
+customer_id int, 
+delivery_date date, 
+foreign key (customer_id) references customer(customer_id) 
+);  
+
+insert into Delivery values 
+(1,'Nasar Butt' , '0332-4582701' , 2 , '2021-08-14'), 
+(2, 'Ahsan Ali', '0341-5509011' , 4 , '2021-01-19'), 
+(3, 'Talha Mushtaq', '0341-5509341' , 3 , '2021-01-29'); 
+
+ 
+ -- Procedeures
+ 
+ create procedure showEmployeeData
+ as
+ begin 
+ select * from Employees;
+ end;
+ 
+  create procedure showCustomerData
+  as
+ begin 
+ select * from Customer
+ end;
+ 
+create procedure showTableData
+as
+ begin 
+ select * from Tables
+ end;
+ 
+ 
+  create procedure showReservationDetails
+  as
+ begin 
+ select * from Reservation
+ end;
+ 
+  create procedure showkarahiData
+  as
+ begin 
+ select * from Karahi
+ end;
+ 
+  create procedure showPizzaData
+  as
+ begin 
+ select * from Pizza
+ end;
+ 
+  create procedure showBurgersData()
+ begin 
+ select * from Burger
+ end;
+ 
+ create procedure showIceCreamData
+ as
+ begin 
+ select * from IceCream
+ end;
+ 
+ create procedure showDeliveryData
+ as
+ begin 
+ select * from Delivery 
+ end;
+ 
+ 
+   create procedure showKarahiOrderData
+   as
+ begin 
+ select * from Karahi_Order
+ end;
+ 
+   create procedure showIceCreamOrderData
+   as
+ begin 
+ select * from IceCream_Order
+ end;
+ 
+   create procedure showBurgerOrderData
+   as
+ begin 
+ select * from Burger_order
+ end;
+ 
+ create procedure showPizzaOrderData
+ as
+ begin 
+ select * from Pizza_Order
+ end;
+ 
+ Create procedure countt
+ as
+begin
+SELECT Status, COUNT(*) AS count_of_tables
+FROM Tables
+GROUP BY Status; 
+end 
+
+call countt;
+ 
+ create procedure Grand_total()
+Begin
+Select
+    (SELECT SUM(pizza_price) FROM Pizza )AS pizza_sales ,
+    (SELECT SUM(burger_price)   FROM Burger )AS burger_sales,
+     (SELECT SUM(iceCream_price)   FROM IceCream )AS iceCream_sales,
+     (SELECT SUM(karahi_price)   FROM Karahi )AS karahi_sales,
+    (SELECT SUM(pizza_price) FROM Pizza ) + (SELECT SUM(burger_price) FROM Burger ) + (SELECT SUM(iceCream_price) FROM IceCream ) + (SELECT SUM(karahi_price) FROM Karahi )  AS grand_sales;
+END 
+
+call Grand_total();
+ 
+ 
+-- QUERIEESS
+
+-- select 
+select employe_name from Employees;
+
+-- AS
+select employe_name as NAAM from Employees;
+
+
+-- Update 
+UPDATE customer 
+SET first_name = 'Abdullah Sarafaraz' 
+WHERE customer_id = 2;
+CALL showCustomerData();
+
+ -- DELETE QUERY
+Delete FROM Burger
+WHERE burger_price = 700.0;
+select * from Burger;
+
+Select * from Pizza
+where pizza_id = 1 ;
+
+-- LESS than query
+Select * from Pizza
+where pizza_id <5 ;
+
+-- add column 
+alter table Employees
+add Address varchar(10);
+select *from Employees;
+
+-- remove column 
+alter table Employees
+drop  column  Address;
+select *from Employees;
+
+-- specific name search details 
+ 
+ SELECT c.first_name, 
+       pi.pizza_name, 
+       bi.burger_name 
+FROM   customer c 
+       JOIN Pizza_Orders po 
+         ON c.customer_id = po.customer_id 
+       JOIN Pizza pi 
+         ON po.pizza_id = pi.pizza_id 
+       JOIN Burger_Orders bo 
+         ON c.customer_id = bo.customer_id 
+       JOIN burger_item bi 
+         ON bo.burger_id = bi.burger_id 
+WHERE  c.first_name = 'Anas';
+
+SELECT 
+    pi.pizza_name,
+    bi.burger_name
+FROM 
+    customer c
+LEFT JOIN 
+    Pizza_Orders po ON c.customer_id = po.customer_id
+LEFT JOIN 
+    Pizza pi ON po.pizza_id = pi.pizza_id
+LEFT JOIN 
+    Burger_Orders bo ON c.customer_id = bo.customer_id
+LEFT JOIN 
+    Burger bi ON bo.burger_id = bi.burger_id
+GROUP BY
+    pi.pizza_name,
+    bi.burger_name;
+
+
+-- drop
+drop database Restaurant_Management_System;
+
+
+
+
+ 
+ 
+ 
